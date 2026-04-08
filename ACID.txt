@@ -1,0 +1,39 @@
+Atomicity
+
+/*
+    begin transaction 
+    reduction of amount from checking account;
+    update account set balance = balance - 500 where account_name = 'checking account';
+    addition of amount from checking account to saving account
+    update account set balance = balance + 500 where account_name = 'saving account';
+*/ 
+
+/*
+    consistency
+
+        create table accounts(
+            acount_id varchar2(50) primary key,
+            balance decimal(10,2) not null,
+            account_type varchar2(20) not null,
+
+            constraint positive_balance check(balance>=0),
+            constraint valid_type check(account_type in ('checking','saving','credit'))
+        );
+*/
+
+/*
+    integrity
+
+    create table customers(
+        customer_id int primary key,
+        name varchar2(100),
+        email varchar(100),
+    );
+
+    create table orders(
+        order_id int primary key,
+        customer_id int,
+        order_total  decimal(10,2),
+        foreign key(customer_id) references customers(customer_id)
+    );
+*/

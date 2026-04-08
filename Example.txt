@@ -1,0 +1,128 @@
+🔹 Initial Unnormalized Table (UNF)
+
+Assume we have this table:
+
+Employee_Table
+
+EmpID	EmpName	DeptID	DeptName	ProjectIDs	ProjectNames
+101	    Satish	D1	    CSE	        P1, P2	    AI, DBMS
+102	    Ravi	D2	    ECE	        P3	        Networks
+
+❌ Problems:
+Repeating groups (ProjectIDs, ProjectNames)
+
+Multi-valued attributes
+
+✅ Step 1: Convert to 1NF (First Normal Form)
+🔹 Rule:
+Remove repeating groups
+Make all attributes atomic (single-valued)
+✔ Decomposition:
+
+Employee_Projects (1NF)
+
+EmpID	    EmpName	DeptID	DeptName	ProjectID	ProjectName
+101	        Satish	D1	    CSE	        P1	            AI
+101	        Satish	D1	    CSE	        P2	            DBMS
+102	        Ravi	D2	    ECE	        P3	            Networks
+
+✅ Now:
+Each cell has atomic values
+No repeating columns
+
+✅ Step 2: Convert to 2NF (Second Normal Form)
+🔹 Rule:
+Must be in 1NF
+Remove partial dependency
+Every non-key attribute must depend on the whole primary key
+
+🔍 Identify Key:
+
+Composite key = (EmpID, ProjectID)
+
+❌ Problem:
+EmpName, DeptID, DeptName depend only on EmpID
+ProjectName depends only on ProjectID
+
+👉 These are partial dependencies
+
+✔ Decomposition:
+1. Employee Table
+
+EmpID	    EmpName	    DeptID	DeptName
+101	        Satish	    D1	    CSE
+102	        Ravi	    D2	    ECE
+
+2. Project Table
+
+ProjectID	ProjectName
+P1	        AI
+P2	        DBMS
+P3	        Networks
+
+3. Employee_Project Mapping
+
+EmpID	ProjectID
+101	    P1
+101	    P2
+102	    P3
+
+✅ Now:
+No partial dependency
+All attributes depend on full key
+✅ Step 3: Convert to 3NF (Third Normal Form)
+🔹 Rule:
+Must be in 2NF
+Remove transitive dependency
+
+❌ Problem:
+
+In Employee table:
+
+EmpID → DeptID
+DeptID → DeptName
+
+👉 So:
+
+EmpID → DeptName (transitive dependency)
+✔ Final Decomposition:
+1. Employee Table
+
+EmpID	EmpName	DeptID
+101	    Satish	D1
+102	    Ravi	D2
+
+2. Department Table
+DeptID	DeptName
+D1	    CSE
+D2	    ECE
+
+3. Project Table
+
+ProjectID	ProjectName
+P1	        AI
+P2	        DBMS
+P3	        Networks
+
+4. Employee_Project Table
+
+EmpID	ProjectID
+101	    P1
+101	    P2
+102	    P3
+
+🎯 Final Result (3NF Achieved)
+
+✅ Benefits:
+
+No redundancy
+No update anomalies
+Better data integrity
+Efficient storage
+
+🔥 Quick Summary:
+
+Normal Form	What was removed
+1NF	Repeating groups
+2NF	Partial dependency
+3NF	Transitive dependency

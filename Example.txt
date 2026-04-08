@@ -14,6 +14,7 @@ Repeating groups (ProjectIDs, ProjectNames)
 Multi-valued attributes
 
 ✅ Step 1: Convert to 1NF (First Normal Form)
+
 🔹 Rule:
 Remove repeating groups
 Make all attributes atomic (single-valued)
